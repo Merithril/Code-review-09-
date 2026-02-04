@@ -5,35 +5,54 @@ This module allows the user to either set a password for Tkinter by themselves o
 
 __author__ = "8033684, Hofmann"
 
-import string
 import random
+import string
+import tkinter as tk
+from tkinter import messagebox
 
-def generate_password(length: int, lower_case: bool, upper_case: bool, digits: bool) -> str :
+def main():
+    """
 
+    """
+    gui = gui.root
+    gui.mainloop()
+
+def gui_root():
+    root = tk.Tk()
+    root.title("Password Generator")
+    root.geometry("300x300")
+    return root
+
+def gui_button():
+    tk.Button(
+        root,
+        text="Generate a password",
+        command = generate_password(root)
+    ).pack(pady=5)
+
+def generate_password():
+    try:
+        length = int(root,length_input.get())
+        if length <= 0:
+            raise ValueError("Length must be greater than 0. Please try again.")
+        return
+
+def possible_characters(legnth: int, use_lower_case: bool, use_upper_case: bool, digits: bool) -> str:
     chars = ""
-    if lower_case:
-        chars += "abcdefghijklmnopqrstuvwyz"
-
-    if upper_case:
-        chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-    if digits:
-        chars += "0123456789"
-
+    if use_lower_case:
+        chars += string.ascii_lowercase
+    if use_upper_case:
+        chars += string.ascii_uppercase
+    if use_digits:
+        chars += string.digits
     if not chars:
-        return f"Error: please choose at least one character"
+        return "Error: please choose at least one character."
 
-    if length <= 0:
-        return f"Error: length must be at least one"
-
-    password = "".join(random.choice(chars) for _ in range(length))
+    password = (".join(random.choice(chars) for _ in range(length))")
     return password
 
+def length_input():
 
 
-
-
-#create gitpush
-
-if __name__ == "__main__"
-    print(generate_password(1, False, False, False)
+if __name__ == "__main__":
+    main()
