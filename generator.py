@@ -14,45 +14,89 @@ def main():
     """
 
     """
-    gui = gui.root
+    gui = gui_root()
     gui.mainloop()
 
 def gui_root():
     root = tk.Tk()
     root.title("Password Generator")
-    root.geometry("300x300")
+    root.geometry("500x600")
+    length_input(root)
+    possible_characters(root)
+    gui_pw_button(root)
+    output_display(root)
     return root
 
-def gui_button():
+def gui_pw_button(gui_root):
     tk.Button(
-        root,
+        gui_root,
         text="Generate a password",
-        command = generate_password(root)
-    ).pack(pady=5)
+        command = generate_password(gui_root)
+    ).pack(pady=50)
 
-def generate_password():
+def generate_password(gui_root):
     try:
-        length = int(root,length_input.get())
+        length = int(gui_root.length_input.get())
         if length <= 0:
             raise ValueError("Length must be greater than 0. Please try again.")
+    except ValueError:
+        print("Invalid input. Please try again.")
         return
 
-def possible_characters(legnth: int, use_lower_case: bool, use_upper_case: bool, digits: bool) -> str:
+
     chars = ""
-    if use_lower_case:
+    if gui_root.char_options["lowercase"]:
         chars += string.ascii_lowercase
-    if use_upper_case:
+    if gui_root.char_optional["uppercase"]:
         chars += string.ascii_uppercase
-    if use_digits:
+    if gui_root.char_optional["digit"]:
         chars += string.digits
     if not chars:
         return "Error: please choose at least one character."
 
-    password = (".join(random.choice(chars) for _ in range(length))")
-    return password
+    #password = "".join(random.choice(chars) for _ in range(length))
+    password = "ABCDEFG"
+    gui_root.output_var.set(password)
 
-def length_input():
+def possible_characters(gui_root):
+    tk.Label(gui_root,
+             text= "Please choose a character from the following possibilities:").pack(pady=5)
+    gui_root.char_options = {}
+    use_lower_case = tk.BooleanVar(value=True)
+    use_upper_case = tk.BooleanVar(value=True)
+    use_digits = tk.BooleanVar(value=True)
 
+    gui_root.char_options["lowercase"] = use_lower_case
+    gui_root.char_options["uppercase"] = use_upper_case
+    gui_root.char_options["digits"] = use_digits
+
+
+    tk.Checkbutton(gui_root,
+                   text = "lower case characters: ",
+                   variable = use_lower_case).pack()
+    tk.Checkbutton(gui_root,
+                   text = "upper case characters: ",
+                   variable = use_upper_case).pack()
+    tk.Checkbutton(gui_root,
+                   text = "digits: ",
+                   variable = use_digits).pack()
+
+
+
+
+
+def length_input(gui_root):
+    tk.Label(gui_root,
+             text = "Please enter the length of the password.").pack(pady=(15,5))
+    gui_root.length_input = tk.Entry(gui_root)
+    gui_root.length_input.pack()
+
+def output_display(gui_root):
+    gui_root.output_var = tk.StringVar()
+    tk.Label(gui_root,
+             text = "customized password:").pack()
+    tk.Entry(gui_root,
+             textvariable = gui_root.output_var).pack(pady=15)
 
 if __name__ == "__main__":
     main()
