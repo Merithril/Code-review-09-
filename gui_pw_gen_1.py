@@ -5,10 +5,11 @@ This module allows the user to either set a password for Tkinter by themselves o
 
 __author__ = "8033684, Hofmann"
 
-import random
-import string
 import tkinter as tk
 from tkinter import messagebox
+from pw_generator_1 import generate_password
+import string
+import random
 
 def main():
     """
@@ -27,38 +28,12 @@ def gui_root():
     output_display(root)
     return root
 
-def gui_pw_button(gui_root):
-    tk.Button(
-        gui_root,
-        text="Generate a password",
-        command = lambda: generate_password(gui_root)
-    ).pack(pady=50)
 
-def generate_password(gui_root):
-    try:
-        length = int(gui_root.length_input.get())
-        if length <= 0:
-            raise ValueError("Length must be greater than 0. Please try again.")
-    except ValueError:
-        print("Invalid input. Please try again.")
-        return
-
-
-    chars = ""
-    if gui_root.char_options["lowercase"].get():
-        chars += string.ascii_lowercase
-    if gui_root.char_options["uppercase"].get():
-        chars += string.ascii_uppercase
-    if gui_root.char_options["digits"].get():
-        chars += string.digits
-    if gui_root.char_options["special_characters"].get():
-        chars += string.punctuation
-    if not chars:
-        return "Error: please choose at least one character."
-
-
-    password = "".join(random.choice(chars) for i in range(length))
-    gui_root.output_var.set(password)
+def length_input(gui_root):
+    tk.Label(gui_root,
+            text="Please enter the length of the password.").pack(pady=(15, 5))
+    gui_root.length_input = tk.Entry(gui_root)
+    gui_root.length_input.pack()
 
 def possible_characters(gui_root):
     tk.Label(gui_root,
@@ -89,21 +64,41 @@ def possible_characters(gui_root):
                    variable = use_special_characters).pack()
 
 
-
-
-
-def length_input(gui_root):
-    tk.Label(gui_root,
-             text = "Please enter the length of the password.").pack(pady=(15,5))
-    gui_root.length_input = tk.Entry(gui_root)
-    gui_root.length_input.pack()
-
 def output_display(gui_root):
-    gui_root.output_var = tk.StringVar()
-    tk.Label(gui_root,
-             text = "customized password:").pack()
-    tk.Entry(gui_root,
-             textvariable = gui_root.output_var).pack(pady=15)
+        gui_root.output_var = tk.StringVar()
+        tk.Label(gui_root,
+                 text="customized password:").pack()
+        tk.Entry(gui_root,
+                 textvariable=gui_root.output_var).pack(pady=15)
+
+def generate_pw_gui(gui_root):
+    chars = ""
+    if gui_root.char_options["lowercase"].get():
+        chars += string.ascii_lowercase
+    if gui_root.char_options["uppercase"].get():
+        chars += string.ascii_uppercase
+    if gui_root.char_options["digits"].get():
+        chars += string.digits
+    if gui_root.char_options["special_characters"].get():
+        chars += string.punctuation
+
+    if not chars:
+        messagebox.showerror("Error")
+        #return "Error: please choose at least one character."
+
+    try:
+        length = int(gui_root.length_input.get())
+        pw = generate_password(length, chars)
+        gui_root.output_var.set(pw)
+    except ValueError as e:
+        messagebox.showerror("Error", str(e))
+
+def gui_pw_button(gui_root):
+    tk.Button(gui_root,
+              text="Generate Password",
+              command=lambda r=gui_root: generate_pw_gui(r)).pack(pady=50)
+
+
 
 if __name__ == "__main__":
-    main()
+            main()
