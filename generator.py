@@ -31,7 +31,7 @@ def gui_pw_button(gui_root):
     tk.Button(
         gui_root,
         text="Generate a password",
-        command = generate_password(gui_root)
+        command = lambda: generate_password(gui_root)
     ).pack(pady=50)
 
 def generate_password(gui_root):
@@ -45,17 +45,19 @@ def generate_password(gui_root):
 
 
     chars = ""
-    if gui_root.char_options["lowercase"]:
+    if gui_root.char_options["lowercase"].get():
         chars += string.ascii_lowercase
-    if gui_root.char_optional["uppercase"]:
+    if gui_root.char_options["uppercase"].get():
         chars += string.ascii_uppercase
-    if gui_root.char_optional["digit"]:
+    if gui_root.char_options["digits"].get():
         chars += string.digits
+    if gui_root.char_options["special_characters"].get():
+        chars += string.punctuation
     if not chars:
         return "Error: please choose at least one character."
 
-    #password = "".join(random.choice(chars) for _ in range(length))
-    password = "ABCDEFG"
+
+    password = "".join(random.choice(chars) for i in range(length))
     gui_root.output_var.set(password)
 
 def possible_characters(gui_root):
@@ -65,10 +67,12 @@ def possible_characters(gui_root):
     use_lower_case = tk.BooleanVar(value=True)
     use_upper_case = tk.BooleanVar(value=True)
     use_digits = tk.BooleanVar(value=True)
+    use_special_characters = tk.BooleanVar(value=True)
 
     gui_root.char_options["lowercase"] = use_lower_case
     gui_root.char_options["uppercase"] = use_upper_case
     gui_root.char_options["digits"] = use_digits
+    gui_root.char_options["special_characters"] = use_special_characters
 
 
     tk.Checkbutton(gui_root,
@@ -80,6 +84,9 @@ def possible_characters(gui_root):
     tk.Checkbutton(gui_root,
                    text = "digits: ",
                    variable = use_digits).pack()
+    tk.Checkbutton(gui_root,
+                   text = "special characters: ",
+                   variable = use_special_characters).pack()
 
 
 
