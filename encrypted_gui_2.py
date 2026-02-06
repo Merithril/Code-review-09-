@@ -38,7 +38,7 @@ class Caesar_cypher_encrypt:
         # button
         tk.Button(self.input,
                   text="Encrypt",
-                  command=self.call).pack(pady=15)
+                  command=self.messager).pack(pady=15)
 
         #checkbox
         self.encrypt_variable = tk.BooleanVar(value = False)
@@ -81,12 +81,15 @@ class Caesar_cypher_encrypt:
 
             self.input_text.delete("1.0", tk.END)
             self.output_text.delete("1.0", tk.END)
+            self.output_text.insert("1.0", message)
 
         except ValueError:
             messagebox.showerror("Error. Please enter a digit for shift")
 
         except Exception as e:
             messagebox.showerror("Error", str(e))
+
+
 
 if __name__ == "__main__":
     main()
