@@ -3,6 +3,11 @@ import random
 import string
 
 def generate_password(gui_root):
+    """
+    Generates and Sets pw using gui internal values.
+    :param gui_root:
+    :return:
+    """
     try:
         pw_length = int(gui_root.length_entry.get())
         if pw_length <= 0:

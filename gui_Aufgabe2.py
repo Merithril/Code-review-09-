@@ -3,6 +3,13 @@ import encryption
 
 
 def setup_gui():
+    """
+    Setup both GUIs for the program. Also sets Button functionality
+    between the two Windows.
+
+    :return: input_gui, output_gui
+    """
+
     input_gui = setup_input_gui()
     output_gui = setup_output_gui()
 
@@ -16,6 +23,12 @@ def setup_gui():
 
 
 def setup_input_gui():
+    """
+    Creates the input guy for user interaction.
+
+    :return: gui_root
+    """
+
     gui_root = tk.Tk()
     gui_root.title("Eingabe Fenster")
     gui_root.geometry("500x500")
@@ -41,7 +54,11 @@ def setup_input_gui():
 
 
 def setup_output_gui():
+    """
+    Sets up the output window displaying the encrypted text.
 
+    :return: gui_root
+    """
     gui_root = tk.Toplevel()
     gui_root.title("Ausgabe Fenster")
     gui_root.geometry("500x500")
@@ -55,9 +72,6 @@ def setup_output_gui():
     gui_root.output_box.config(state="disabled")
 
     return gui_root
-
-
-
 
 
 def main():

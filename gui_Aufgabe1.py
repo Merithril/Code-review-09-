@@ -2,6 +2,11 @@ import tkinter as tk
 import password_generator
 
 def create_gui_root():
+    """
+    Creates the gui root and sets all things around the basic window.
+
+    :return:
+    """
     gui_root = tk.Tk()
     gui_root.title("Password Generator")
     gui_root.geometry("500x500")
@@ -10,12 +15,23 @@ def create_gui_root():
 
 
 def password_length_input(gui_root):
+    """
+    Sets user input to set pw length.
+
+    :param gui_root:
+    :return:
+    """
     tk.Label(gui_root, text="Password Length:").pack(pady=(15, 5))
     gui_root.length_entry = tk.Entry(gui_root)
     gui_root.length_entry.pack()
 
 
 def character_selection(gui_root):
+    """
+    Sets user input to set character selection.
+    :param gui_root:
+    :return:
+    """
     tk.Label(gui_root, text="Character Selection:").pack(pady=(15, 5))
 
     options = {
@@ -33,6 +49,11 @@ def character_selection(gui_root):
         tk.Checkbutton(gui_root, text=text, variable=var).pack()
 
 def generate_password_button(gui_root):
+    """
+    Setup password button to activate the generation process.
+    :param gui_root:
+    :return:
+    """
     tk.Button(
         gui_root,
         text="Generate Password",
@@ -41,6 +62,11 @@ def generate_password_button(gui_root):
 
 
 def output_display(gui_root):
+    """
+    Setup output display to display the generated pw.
+    :param gui_root:
+    :return:
+    """
     gui_root.output_var = tk.StringVar()
     tk.Label(gui_root, text="Generated Password").pack()
     tk.Entry(
@@ -51,9 +77,11 @@ def output_display(gui_root):
     ).pack(pady=15)
 
 
-
-
 def setup_gui():
+    """
+    Calls all the setup functions and returns the complete gui.
+    :return: gui
+    """
     gui = create_gui_root()
     password_length_input(gui)
     character_selection(gui)

@@ -2,6 +2,14 @@ from tkinter import messagebox
 import tkinter as tk
 
 def encryption(gui_root_input, gui_root_output):
+    """
+    Encrypts a given message stored in an tk gui object and
+    sets the encrypted text to another gui's output.
+
+    :param gui_root_input:
+    :param gui_root_output:
+    :return:
+    """
 
     original_text = gui_root_input.entry_box.get("1.0", "end-1c")
 
@@ -33,6 +41,14 @@ def encryption(gui_root_input, gui_root_output):
     set_output(gui_root_output.output_box, encrypted_text)
 
 def set_output(text_widget, text):
+    """
+    Sets the output to widget from guy.
+
+    :param text_widget:
+    :param text:
+    :return:
+    """
+
     text_widget.config(state="normal")
     text_widget.delete("1.0", tk.END)
     text_widget.insert("1.0", text)
