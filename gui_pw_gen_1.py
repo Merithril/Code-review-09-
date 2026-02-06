@@ -94,9 +94,11 @@ def generate_pw_gui(gui_root):
         messagebox.showerror("Error", str(e))
 
 def gui_pw_button(gui_root):
-    tk.Button(gui_root,
-              text="Generate Password",
-              command=lambda r=gui_root: generate_pw_gui(r)).pack(pady=50)
+    tk.Button(
+        gui_root,
+        text="Generate Password",
+        command=lambda r=gui_root: generate_pw_gui(r)
+    ).pack(pady=50)
 
 
 
