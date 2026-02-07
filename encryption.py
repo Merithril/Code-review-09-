@@ -1,5 +1,11 @@
+"""
+encryption of gui internal message.
+"""
+
 from tkinter import messagebox
 import tkinter as tk
+
+__author__ = "7155628, Keller"
 
 def encryption(gui_root_input, gui_root_output):
     """

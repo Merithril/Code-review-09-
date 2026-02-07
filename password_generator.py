@@ -1,6 +1,12 @@
+"""
+password generating function.
+"""
+
 from tkinter import messagebox
 import random
 import string
+
+__author__ = "7155628, Keller"
 
 def generate_password(gui_root):
     """

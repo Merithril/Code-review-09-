@@ -1,6 +1,11 @@
+"""
+setup for gui for excersise 2 requirements
+"""
+
 import tkinter as tk
 import encryption
 
+__author__ = "7155628, Keller"
 
 def setup_gui():
     """

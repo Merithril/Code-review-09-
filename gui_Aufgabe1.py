@@ -1,5 +1,11 @@
+"""
+gui generator and setup.
+"""
+
 import tkinter as tk
 import password_generator
+
+__author__ = "7155628, Keller"
 
 def create_gui_root():
     """
