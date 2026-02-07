@@ -1,24 +1,34 @@
 """
-This module allows the user to either set a password for Tkinter by themselves or generate one using a password generator.
+This module allows the user to either set a password
+using a Tkinter based graphical user interface
+to generate customizable passwords.
+Allows the user to choose between different characters
+and specify the password length.
 
 """
 
 __author__ = "8033684, Hofmann"
 
+
 import tkinter as tk
+import string
 from tkinter import messagebox
 from pw_generator_1 import generate_password
-import string
-import random
+
 
 def main():
     """
-
+    starts the password generator and the GUI application.
     """
+
     gui = gui_root()
     gui.mainloop()
 
+
 def gui_root():
+    """
+    Creates the main GUI window and returns it.
+    """
     root = tk.Tk()
     root.title("Password Generator")
     root.geometry("500x600")
@@ -30,14 +40,28 @@ def gui_root():
 
 
 def length_input(gui_root):
-    tk.Label(gui_root,
-            text="Please enter the length of the password.").pack(pady=(15, 5))
+    """
+    Creates an entry field which allows the user to enter a password length.
+    """
+
+    tk.Label(gui_root, text="Please enter the length of the password.").pack(
+        pady=(15, 5)
+    )
     gui_root.length_input = tk.Entry(gui_root)
     gui_root.length_input.pack()
 
+
 def possible_characters(gui_root):
-    tk.Label(gui_root,
-             text= "Please choose a character from the following possibilities:").pack(pady=5)
+    """
+    Creates checkboxes which allow the user to choose between
+     different character types
+     (lowercase, uppercase, digits, symbols).
+     structure generated with ai.
+    """
+    tk.Label(
+        gui_root,
+        text="Please choose a character from the following possibilities:"
+    ).pack(pady=5)
     gui_root.char_options = {}
     use_lower_case = tk.BooleanVar(value=True)
     use_upper_case = tk.BooleanVar(value=True)
@@ -49,29 +73,34 @@ def possible_characters(gui_root):
     gui_root.char_options["digits"] = use_digits
     gui_root.char_options["special_characters"] = use_special_characters
 
-
-    tk.Checkbutton(gui_root,
-                   text = "lower case characters: ",
-                   variable = use_lower_case).pack()
-    tk.Checkbutton(gui_root,
-                   text = "upper case characters: ",
-                   variable = use_upper_case).pack()
-    tk.Checkbutton(gui_root,
-                   text = "digits: ",
-                   variable = use_digits).pack()
-    tk.Checkbutton(gui_root,
-                   text = "special characters: ",
-                   variable = use_special_characters).pack()
+    tk.Checkbutton(
+        gui_root, text="lower case characters: ", variable=use_lower_case
+    ).pack()
+    tk.Checkbutton(
+        gui_root, text="upper case characters: ", variable=use_upper_case
+    ).pack()
+    tk.Checkbutton(gui_root, text="digits: ", variable=use_digits).pack()
+    tk.Checkbutton(
+        gui_root, text="special characters: ", variable=use_special_characters
+    ).pack()
 
 
 def output_display(gui_root):
-        gui_root.output_var = tk.StringVar()
-        tk.Label(gui_root,
-                 text="customized password:").pack()
-        tk.Entry(gui_root,
-                 textvariable=gui_root.output_var).pack(pady=15)
+    """
+    Creates the output display which prints the generated password.
+    """
+
+    gui_root.output_var = tk.StringVar()
+    tk.Label(gui_root, text="customized password:").pack()
+    tk.Entry(gui_root, textvariable=gui_root.output_var).pack(pady=15)
+
 
 def generate_pw_gui(gui_root):
+    """
+    Generates a password based on selected character options
+    and user-specific length.
+    structure generated using ai.
+    """
     chars = ""
     if gui_root.char_options["lowercase"].get():
         chars += string.ascii_lowercase
@@ -84,7 +113,6 @@ def generate_pw_gui(gui_root):
 
     if not chars:
         messagebox.showerror("Error")
-        #return "Error: please choose at least one character."
 
     try:
         length = int(gui_root.length_input.get())
@@ -93,14 +121,17 @@ def generate_pw_gui(gui_root):
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
+
 def gui_pw_button(gui_root):
+    """
+    Creates the Generate Button and links it to the password generator module.
+    """
     tk.Button(
         gui_root,
         text="Generate Password",
-        command=lambda r=gui_root: generate_pw_gui(r)
+        command=lambda r=gui_root: generate_pw_gui(r),
     ).pack(pady=50)
 
 
-
 if __name__ == "__main__":
-            main()
+    main()
