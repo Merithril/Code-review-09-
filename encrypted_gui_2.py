@@ -11,7 +11,8 @@ __author__ = "8033684, Hofmann"
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import scrolledtext
-from caesear_cypher_2 import caesar_encrypt
+from ceasar_cypher_2 import encrypt
+
 
 
 def main():
@@ -101,7 +102,7 @@ class Caesar_cypher_encrypt:
             shift = int(self.shift_entry.get())
 
             if self.encrypt_variable.get():
-                message = caesar_encrypt(text, shift)
+                message = encrypt(text, shift)
             else:
                 message = text
 

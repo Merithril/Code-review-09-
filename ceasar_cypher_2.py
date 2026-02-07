@@ -5,7 +5,6 @@ to shift letters by a fixed number to generate a encryption.
 
 __author__ = "8033684, Hofmann"
 
-from encrypted_gui_2 import caesar_encrypt
 
 
 def encrypt(text: str, shift: int = 5) -> str:
@@ -21,7 +20,8 @@ def encrypt(text: str, shift: int = 5) -> str:
             results += chr((ord(char) - 65 + shift) % 26 + 65)
         else:
             results += char
-        return results
+
+    return results
 
 
 def decrypt_function(text: str, shift: int = 5) -> str:
