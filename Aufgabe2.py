@@ -5,6 +5,7 @@ import gui_Aufgabe2
 
 __author__ = "7155628, Keller"
 
+
 def main():
     gui_Aufgabe2.main()
 

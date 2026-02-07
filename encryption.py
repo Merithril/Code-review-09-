@@ -7,6 +7,7 @@ import tkinter as tk
 
 __author__ = "7155628, Keller"
 
+
 def encryption(gui_root_input, gui_root_output):
     """
     Encrypts a given message stored in an tk gui object and
@@ -45,6 +46,7 @@ def encryption(gui_root_input, gui_root_output):
             encrypted_text += char
 
     set_output(gui_root_output.output_box, encrypted_text)
+
 
 def set_output(text_widget, text):
     """

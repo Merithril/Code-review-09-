@@ -8,6 +8,7 @@ import string
 
 __author__ = "7155628, Keller"
 
+
 def generate_password(gui_root):
     """
     Generates and Sets pw using gui internal values.

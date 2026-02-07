@@ -7,6 +7,7 @@ import password_generator
 
 __author__ = "7155628, Keller"
 
+
 def create_gui_root():
     """
     Creates the gui root and sets all things around the basic window.
@@ -53,6 +54,7 @@ def character_selection(gui_root):
         var = tk.BooleanVar(value=default)
         gui_root.char_options[key] = var
         tk.Checkbutton(gui_root, text=text, variable=var).pack()
+
 
 def generate_password_button(gui_root):
     """

@@ -7,6 +7,7 @@ import encryption
 
 __author__ = "7155628, Keller"
 
+
 def setup_gui():
     """
     Setup both GUIs for the program. Also sets Button functionality
