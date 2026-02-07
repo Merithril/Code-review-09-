@@ -1,19 +1,24 @@
 """
-....
+This module contains the core function to generate a random password
+using the user input for length and character specification.
 
 """
 
 __author__ = "8033684, Hofmann"
 
 import random
-import string
 
 
 def generate_password(length: int, chars: str) -> str:
-      if length <= 0:
-          raise ValueError("length must be > 0")
+    """
+    Generates a random password based on selected character options and
+    user specific length.
 
-      if not chars:
-          raise ValueError("At least one character type must be selected.")
+    """
+    if length <= 0:
+        raise ValueError("length must be > 0")
 
-      return "".join(random.choice(chars) for _ in range(length))
+    if not chars:
+        raise ValueError("At least one character type must be selected.")
+
+    return "".join(random.choice(chars) for _ in range(length))
